@@ -1,0 +1,26 @@
+{
+  "name": "classenv",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "bowzee",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dilame/classenv"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^25.1.4",
+    "jest": "^25.1.0",
+    "prettier": "^2.0.2",
+    "reflect-metadata": "^0.1.13",
+    "ts-jest": "^25.2.1",
+    "typescript": "^3.8.3"
+  }
+}
