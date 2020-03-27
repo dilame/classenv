@@ -1,6 +1,6 @@
 {
   "name": "classenv",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Describe your environment variables contract with TypeScript class",
   "main": "dist/index.js",
   "files": [
