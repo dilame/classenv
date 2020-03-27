@@ -19,6 +19,9 @@ class Environment {
 
   @Env('IS_SOMETHING_ENABLED')
   static isEnabledBln: boolean;
+
+  @Env() // Auto UPPER_SNAKE_CASE conversion supported
+  static isSomethingEnabled: number
 }
 
 console.log(typeof Environment.isEnabledStr, Environment.isEnabledStr) // string 1
