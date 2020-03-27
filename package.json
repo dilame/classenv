@@ -7,7 +7,10 @@
     "dist"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "test": "npx jest",
+    "prebuild": "rm -rf ./dist",
+    "prepublish": "npm run build"
   },
   "author": "bowzee",
   "repository": {
@@ -19,9 +22,11 @@
     "@types/jest": "^25.1.4",
     "jest": "^25.1.0",
     "prettier": "^2.0.2",
-    "reflect-metadata": "^0.1.13",
     "ts-jest": "^25.2.1",
     "typescript": "^3.8.3"
+  },
+  "peerDependencies": {
+    "reflect-metadata": "^0.1.13"
   },
   "keywords": [
     "dotenv",

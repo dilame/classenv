@@ -15,7 +15,7 @@ export function Env(inputName?: string): any {
         value = target[key];
       }
     }
-    const designType = Reflect.getMetadata('design:type', target, key);
+    const designType = (Reflect as any).getMetadata('design:type', target, key);
     if ([String, Number, Boolean].includes(designType)) {
       Object.defineProperty(target, key, {
         value: designType(value),

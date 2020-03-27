@@ -5,7 +5,6 @@ A perfect typescript environment variables library.
 - Strongly-typed declarative class containing your environment data
 - Type-casting using TypeScript metadata reflection
 - Auto UPPER_SNAKE_CASE conversion
-- 0 dependencies
 - Throws runtime error if variable doesn't exist
 - Default values support
 - Makes decorated properties read-only in runtime
@@ -52,3 +51,26 @@ Environment.isEnabledBln = false;
 ```
 
 `@Env` property data type should be scalar (string, number or boolean).
+
+## Dependencies
+
+###reflect-metadata
+```
+npm i reflect-metadata
+```
+
+And then import it somewhere close to your entry point (`index.ts`/`main.ts`/etc...). 
+Should be imported before any of your environment classes.
+
+```typescript
+import 'reflect-metadata';
+```
+
+###tsconfig.json
+
+These settings should be enabled
+
+```
+"emitDecoratorMetadata": true,
+"experimentalDecorators": true,
+```
