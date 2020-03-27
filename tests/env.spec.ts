@@ -16,6 +16,9 @@ describe('env decorator', () => {
 
     @Env()
     static testTest: number;
+
+    @Env()
+    static withDefault: string = 'yeah its me'
   }
 
   it('should throw when variable not exists', () => {
@@ -28,6 +31,14 @@ describe('env decorator', () => {
     expect(typeof Environment.testBln).toBe('boolean');
     expect(typeof Environment.testTest).toBe('number');
   });
+
+  it('should auto convert to upper-snake-case', () => {
+    expect(typeof Environment.testTest).toBe('number');
+  })
+
+  it('should not throw when default value is set', () => {
+    expect(Environment.withDefault).toBe('yeah its me');
+  })
 
   it('should throw when trying to mutate', () => {
     expect(() => (Environment.testStr = '1')).toThrow();

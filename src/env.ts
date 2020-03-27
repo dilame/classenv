@@ -6,13 +6,19 @@ export function Env(inputName?: string): any {
         .split(/(?=[A-Z])/)
         .join('_')
         .toUpperCase();
-    if (typeof process.env[name] === 'undefined') {
-      throw new Error(`Environment variable ${name} is undefined`);
+
+    let value = process.env[name];
+    if (typeof value === 'undefined') {
+      if (typeof target[key] === 'undefined') {
+        throw new Error(`Environment variable ${name} is undefined`);
+      } else {
+        value = target[key];
+      }
     }
     const designType = Reflect.getMetadata('design:type', target, key);
     if ([String, Number, Boolean].includes(designType)) {
       Object.defineProperty(target, key, {
-        value: designType(process.env[name]),
+        value: designType(value),
         writable: false,
         enumerable: true,
         configurable: true,

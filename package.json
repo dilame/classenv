@@ -22,5 +22,20 @@
     "reflect-metadata": "^0.1.13",
     "ts-jest": "^25.2.1",
     "typescript": "^3.8.3"
-  }
+  },
+  "keywords": [
+    "dotenv",
+    "env",
+    ".env",
+    "environment",
+    "variables",
+    "config",
+    "settings",
+    "process",
+    "process.env",
+    "typescript",
+    "class",
+    "decorator",
+    "defaults"
+  ]
 }
