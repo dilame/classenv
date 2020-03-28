@@ -1,6 +1,6 @@
 # classenv
 
-A perfect typescript environment variables library.
+A perfect typescript class environment variables library.
 
 - Strongly-typed declarative class containing your environment data
 - Type-casting using TypeScript metadata reflection
@@ -8,8 +8,6 @@ A perfect typescript environment variables library.
 - Throws runtime error if variable doesn't exist
 - Default values support
 - Makes decorated properties read-only in runtime
-
-Built-in support for type-casting.
 
 **.env**
 ```
@@ -20,6 +18,12 @@ IS_SOMETHING_ENABLED=1
 import { Env } from 'classenv';
 
 class Environment {
+  @Env() // Auto UPPER_SNAKE_CASE conversion supported
+  static isSomethingEnabled: number;
+
+  @Env() // Won't throw, because got default value
+  static withDefault: string = 'yeah its me'
+
   @Env('IS_SOMETHING_ENABLED')
   static isEnabledStr: string;
 
@@ -28,12 +32,6 @@ class Environment {
 
   @Env('IS_SOMETHING_ENABLED')
   static isEnabledBln: boolean;
-
-  @Env() // Auto UPPER_SNAKE_CASE conversion supported
-  static isSomethingEnabled: number;
-
-  @Env() // Won't throw, because got default value
-  static withDefault: string = 'yeah its me'
 }
 
  // string 1
