@@ -52,7 +52,7 @@ Environment.isEnabledBln = false;
 
 ## Dependencies
 
-###reflect-metadata
+### reflect-metadata
 ```
 npm i reflect-metadata
 ```
@@ -64,7 +64,7 @@ Should be imported before any of your environment classes.
 import 'reflect-metadata';
 ```
 
-###tsconfig.json
+### tsconfig.json
 
 These settings should be enabled
 
