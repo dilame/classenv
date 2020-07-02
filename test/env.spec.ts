@@ -5,6 +5,9 @@ describe('env decorator', () => {
   process.env.TEST_TEST = '1';
 
   class Environment {
+    @Env()
+    testTest: number;
+
     @Env('TEST_TEST')
     static testStr: string;
 
@@ -42,5 +45,10 @@ describe('env decorator', () => {
 
   it('should throw when trying to mutate', () => {
     expect(() => (Environment.testStr = '1')).toThrow();
+  });
+
+  it('should support instance properties', () => {
+    const env = new Environment();
+    expect(typeof env.testTest).toBe('number');
   });
 });

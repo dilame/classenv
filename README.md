@@ -8,18 +8,29 @@ A perfect typescript class environment variables library.
 - Throws runtime error if variable doesn't exist
 - Default values support
 - Makes decorated properties read-only in runtime
+- Supports both static and instance properties
+
+
+## Description
+Let's pretend we have very simple
 
 **.env**
 ```
 IS_SOMETHING_ENABLED=1
 ```
 
+How can we describe it using **classenv**
+
+**environment.ts**
 ```typescript
 import { Env } from 'classenv';
 
-class Environment {
-  @Env() // Auto UPPER_SNAKE_CASE conversion supported
-  static isSomethingEnabled: number;
+export class Environment {
+  @Env() // Auto UPPER_SNAKE_CASE conversion
+  static isSomethingEnabled: number; // process.env.IS_SOMETHING_ENABLED
+
+  @Env() // Instance properties supported
+  isSomethingEnabled: number;
 
   @Env() // Won't throw, because got default value
   static withDefault: string = 'yeah its me'
@@ -33,22 +44,36 @@ class Environment {
   @Env('IS_SOMETHING_ENABLED')
   static isEnabledBln: boolean;
 }
+```
 
- // string 1
+`@Env` property data type should be scalar (string, number or boolean).
+
+**main.ts**
+```typescript
+import {Environment} from './environment.ts'
+
 console.log(typeof Environment.isEnabledStr, Environment.isEnabledStr)
- // number 1
+ // string 1
+
 console.log(typeof Environment.isEnabledNmbr, Environment.isEnabledNmbr)
- // boolean true
-console.log(typeof Environment.isEnabledBln, Environment.isEnabledBln)
  // number 1
+
+console.log(typeof Environment.isEnabledBln, Environment.isEnabledBln)
+ // boolean true
+
 console.log(typeof Environment.isSomethingEnabled, Environment.isSomethingEnabled)
+ // number 1
 
 Environment.isEnabledBln = false;
 // TypeError: Cannot assign to read only property 'isEnabledBln' of function 'class Test{}'
 
-```
 
-`@Env` property data type should be scalar (string, number or boolean).
+// Let's check instance properties
+const env = new Environment();
+
+console.log(env.isSomethingEnabled) // 1
+
+```
 
 ## Dependencies
 
