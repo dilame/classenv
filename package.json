@@ -8,7 +8,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "tsc -p tsconfig.build.json",
     "test": "npx jest",
     "prebuild": "rm -rf ./dist",
     "prepublish": "npm run build"

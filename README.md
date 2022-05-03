@@ -3,12 +3,13 @@
 A perfect typescript class environment variables library.
 
 - Strongly-typed declarative class containing your environment data
+- Supports both static and instance properties
 - Type-casting using TypeScript metadata reflection
 - Auto UPPER_SNAKE_CASE conversion
+- Converts environment values "FALSE", "false", "0" to false for boolean types
 - Throws runtime error if variable doesn't exist
 - Default values support
 - Makes decorated properties read-only in runtime
-- Supports both static and instance properties
 
 
 ## Description
