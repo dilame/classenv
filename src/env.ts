@@ -5,34 +5,52 @@ function upperSnakeCase(str: string): string {
     .toUpperCase();
 }
 
-export function Env(variableName?: string): any {
-  return (target, key: string) => {
+const FALSEY_VALUES = ['false', '0'];
+
+export function Env(variableName?: string | string[]): any {
+  return (target: any, key: string) => {
     variableName ??= upperSnakeCase(key);
 
-    let value: any = process.env[variableName];
-    if (typeof value === 'undefined') {
-      if (typeof target[key] === 'undefined') {
-        throw new Error(`Environment variable ${variableName} is undefined`);
-      } else {
-        value = target[key];
+    let envVarValue: string | undefined = void 0;
+    if (Array.isArray(variableName)) {
+      const existingKey = variableName.find(
+        (k) => typeof process.env[k] === 'string',
+      );
+      if (typeof existingKey === 'string') {
+        envVarValue = process.env[existingKey];
       }
+    } else {
+      envVarValue = process.env[variableName];
     }
-    const designType = (Reflect as any).getMetadata('design:type', target, key);
-    if ([String, Number, Boolean].includes(designType)) {
-      if (designType === Boolean && ['false', 'FALSE', '0'].includes(value)) {
-        value = false;
+
+    let outValue: string;
+    if (typeof envVarValue === 'undefined') {
+      if (typeof target[key] === 'undefined') {
+        throw new Error(`CLASSENV: Environment variable ${JSON.stringify(variableName)} is undefined and default value for field ${JSON.stringify(key)} not set`);
       } else {
-        value = designType(value);
+        outValue = target[key];
       }
+    } else {
+      outValue = envVarValue;
+    }
+    const DesignType = (Reflect as any).getMetadata('design:type', target, key);
+    if ([String, Number, Boolean].includes(DesignType)) {
+      if (
+        DesignType === Boolean &&
+        FALSEY_VALUES.includes(outValue.toLowerCase())
+      ) {
+        outValue = '';
+      }
+      outValue = DesignType(outValue);
       Object.defineProperty(target, key, {
-        value,
+        value: outValue,
         writable: false,
         enumerable: true,
         configurable: true,
       });
     } else {
       throw new Error(
-        `${key} type must be one of [String, Number, Boolean]. Got ${designType.name}`,
+        `CLASSENV: ${key} type must be one of [String, Number, Boolean]. Got ${DesignType.name}`,
       );
     }
   };
