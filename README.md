@@ -23,7 +23,6 @@ Only `string`, `number`, and `boolean` is supported.
 process.env['PORT'] = '3000';
 
 class ServerSettings {
-  // Field name will be auto-converted to POSTGRES_URL for checking the process.env
   @Env('PORT')
   portNumber!: number; // 3000
   @Env('PORT')
@@ -43,7 +42,7 @@ process.env['POSTGRES_URL'] = 'postgres://127.0.0.1:5432';
 class PostgresAdapter {
   // Field name will be auto-converted to POSTGRES_URL for checking the process.env
   @Env()
-  postgresUrl!: string; // postgres://127.0.0.1:5432
+  postgresUrl!: string; // "postgres://127.0.0.1:5432"
 }
 ```
 
@@ -52,7 +51,7 @@ class PostgresAdapter {
 ```ts
 class ServerSettings {
   @Env()
-  port: number = 3000;
+  port: number = 3000; // 3000
 }
 ```
 
@@ -80,14 +79,14 @@ class PostgresAdapter {
 }
 ```
 
-### 🔘 Pick one of the name from array
+### 🔘 Pick one of the names from array
 
 ```ts
 process.env['POSTGRES_URL'] = 'postgres://127.0.0.1:5432';
 
 class PostgresAdapter {
   @Env(['POSTGRESQL_URI', 'PG_URL', 'POSTGRES_URL'])
-  url!: string; // postgres://127.0.0.1:5432
+  url!: string; // "postgres://127.0.0.1:5432"
 }
 ```
 
@@ -98,7 +97,7 @@ process.env['PORT'] = '3000';
 
 class ServerSettings {
   @Env()
-  static port: number = 3000;
+  static port: number; // "3000"
 }
 ```
 
