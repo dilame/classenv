@@ -1,6 +1,6 @@
 {
   "name": "classenv",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Describe your environment variables contract with TypeScript class decorator",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
