@@ -1,7 +1,7 @@
 {
   "name": "classenv",
   "version": "1.3.1",
-  "description": "Describe your environment variables contract with TypeScript class",
+  "description": "Describe your environment variables contract with TypeScript class decorator",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -32,18 +32,18 @@
     "reflect-metadata": "^0.1.13"
   },
   "keywords": [
-    "dotenv",
-    "env",
-    ".env",
+    "typescript",
+    "class",
     "environment",
+    "env",
     "variables",
+    "decorator",
+    "dotenv",
+    ".env",
     "config",
     "settings",
     "process",
     "process.env",
-    "typescript",
-    "class",
-    "decorator",
     "defaults"
   ]
 }
